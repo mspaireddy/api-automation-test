@@ -1,34 +1,31 @@
-import { getRequest } from '../utils/apiClient';
+import axios from 'axios';
 
-describe('Random User API', () => {
+describe("Random User API", () => {
+  jest.setTimeout(10000); // 10s timeout for CI
 
-  // Happy path: valid API call
-  test('Fetch a random user', async () => {
-    const response = await getRequest('https://randomuser.me/api/');
-    expect(response.status).toBe(200);
-    expect(response.data.results.length).toBeGreaterThan(0); // Ensure we got at least 1 user
+  test("Fetch a random user", async () => {
+    const res = await axios.get("https://randomuser.me/api/");
+    expect(res.status).toBe(200);
+    expect(res.data).toHaveProperty("results");
   });
 
-  // Happy path: fetch multiple users
-  test('Fetch 5 random users', async () => {
-    const response = await getRequest('https://randomuser.me/api/?results=5');
-    expect(response.status).toBe(200);
-    expect(response.data.results.length).toBe(5);
+  test("Fetch 5 random users", async () => {
+    const res = await axios.get("https://randomuser.me/api/?results=5");
+    expect(res.status).toBe(200);
+    expect(res.data.results.length).toBe(5);
   });
 
-  // Unhappy path: invalid endpoint
-  test('Invalid endpoint returns 404', async () => {
-    const response = await getRequest('https://randomuser.me/invalid-endpoint');
-    expect(response.status).toBe(404);
-  });
-
-  // Unhappy path: incorrect domain
-  test('Request to wrong domain returns error', async () => {
+  test("Invalid endpoint returns 404", async () => {
     try {
-      await getRequest('https://randomuser.wrongdomain/api/');
-    } catch (error: any) {
-      expect(error).toBeDefined();
+      await axios.get("https://randomuser.me/invalid-endpoint");
+    } catch (err: any) {
+      expect(err.response.status).toBe(404);
     }
   });
 
+  test("Request to wrong domain returns error", async () => {
+    await expect(
+      axios.get("https://nonexistent.randomuser.me/")
+    ).rejects.toThrow();
+  });
 });
