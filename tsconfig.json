@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "rootDir": "./",
+    "outDir": "./dist",
+    "types": ["node", "jest"]
+  },
+  "include": ["tests/**/*.ts", "utils/**/*.ts"]
+}
