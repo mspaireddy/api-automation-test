@@ -1,23 +1,37 @@
 **API Automation Test Framework**
 
 This project has been created using a API automation test framework built using the below: 
+
 •	TypeScript
+
 •	Jest
+
 •	ts-jest 
+
 It demonstrates all the testing scenarios along with generating a HTML report for the provided APIs.
 
 **Project Structure**
 
 •	api-automation-test/
+
 •	node_modules/
+
 •	reports/ # Jest HTML reports
+
 •	tests/ # Test files
-o	randomUser.test.ts # Example tests for Random User API
+
+    o	randomUser.test.ts # Example tests for Random User API
+
 •	utils/ # Utility files
-o	apiClient.ts # API request helper
+
+    o	apiClient.ts # API request helper
+
 •	jest.config.js # Jest configuration
+
 •	package.json # NPM dependencies and scripts
+
 •	tsconfig.json # TypeScript configuration ---
+
 
 **Setup Instructions**
 
